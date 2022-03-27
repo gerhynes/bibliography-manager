@@ -13,6 +13,7 @@ public class ArticleForm implements ActionListener {
     private JTextField articleTitleInput;
     private JTextField articleYearInput;
     private JTextField articleJournalInput;
+    private JTextField articleDoiInput;
     private JButton articleSubmitBtn;
 
     public ArticleForm(JPanel cardContainer){
@@ -20,7 +21,7 @@ public class ArticleForm implements ActionListener {
         this.cardLayout = (CardLayout) cardContainer.getLayout();
         this.articleForm = new JPanel(new GridLayout(2, 1));
         JPanel articleFormTitle = new JPanel(new FlowLayout());
-        JPanel articleFormBody = new JPanel(new GridLayout(5,1));
+        JPanel articleFormBody = new JPanel(new GridLayout(6,1));
 
         // Set title message
         JLabel bookFormMessage = new JLabel("Enter the article's details");
@@ -51,6 +52,12 @@ public class ArticleForm implements ActionListener {
         journalInputs.add(articleJournalLabel);
         journalInputs.add(articleJournalInput);
 
+        JLabel articleDoiLabel = new JLabel("Enter DOI (Format 10.****/*****)");
+        articleDoiInput = new JTextField(20);
+        JPanel doiInputs = new JPanel();
+        doiInputs.add(articleDoiLabel);
+        doiInputs.add(articleDoiInput);
+
         articleSubmitBtn = new JButton("Submit");
         articleSubmitBtn.addActionListener(this);
         JPanel buttonWrapper = new JPanel();
@@ -61,6 +68,7 @@ public class ArticleForm implements ActionListener {
         articleFormBody.add(titleInputs);
         articleFormBody.add(yearInputs);
         articleFormBody.add(journalInputs);
+        articleFormBody.add(doiInputs);
         articleFormBody.add(buttonWrapper);
 
         // Add title and body
@@ -80,8 +88,9 @@ public class ArticleForm implements ActionListener {
             String author = articleAuthorInput.getText();
             int year = Integer.parseInt(articleYearInput.getText());
             String journal = articleJournalInput.getText();
+            String doi = articleDoiInput.getText();
 
-            System.out.println("title: " + title + " author: " + author + " year: " + year + " journal: " + journal);
+            System.out.println("title: " + title + " author: " + author + " year: " + year + " journal: " + journal + " doi: " + doi);
 
             cardLayout.show(cardContainer, "defaultCard");
         }
