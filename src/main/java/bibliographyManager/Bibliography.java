@@ -22,8 +22,12 @@ public class Bibliography {
         return self;
     }
 
-    public void add(String citeKey, BibItem entry) {
+    public void addEntry(String citeKey, BibItem entry) {
         this.entries.put(citeKey, entry);
+    }
+
+    public void deleteEntry(String citeKey){
+        entries.remove(citeKey);
     }
 
     public Map<String, BibItem> getEntries() {
@@ -56,6 +60,10 @@ public class Bibliography {
         return res;
     }
 
+    /**
+     * Writes entries to .txt file in BibTeX format
+     * @param fileName
+     */
     public void saveToFile(String fileName) {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + ".txt"));

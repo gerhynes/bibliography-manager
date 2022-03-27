@@ -10,10 +10,17 @@ public class ArticleBibItemTests {
     String doi = article.getDoi();
 
     @Test
-    public void testDoiPrefix() {
+    public void testDoiURLPrefix() {
         // DOI starts with "https://doi.org/"
         assertTrue(doi.startsWith("https://doi.org/"));
     }
+
+    @Test
+    public void testDoiPrefixStructure() {
+        // DOI starts with "https://doi.org/"
+//        assertTrue(doi.substring(16)));
+    }
+
 
     @Test
     public void testDoiSuffixStructure() {

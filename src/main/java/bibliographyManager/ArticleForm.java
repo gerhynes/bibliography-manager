@@ -19,7 +19,7 @@ public class ArticleForm implements ActionListener {
     public ArticleForm(JPanel cardContainer){
         this.cardContainer = cardContainer;
         this.cardLayout = (CardLayout) cardContainer.getLayout();
-        this.articleForm = new JPanel(new GridLayout(2, 1));
+        this.articleForm = new JPanel(new GridLayout(3, 1));
         JPanel articleFormTitle = new JPanel(new FlowLayout());
         JPanel articleFormBody = new JPanel(new GridLayout(6,1));
 
@@ -52,7 +52,7 @@ public class ArticleForm implements ActionListener {
         journalInputs.add(articleJournalLabel);
         journalInputs.add(articleJournalInput);
 
-        JLabel articleDoiLabel = new JLabel("Enter DOI (Format 10.****/*****)");
+        JLabel articleDoiLabel = new JLabel("Enter DOI (Format 10.NNNN/NNNNN)");
         articleDoiInput = new JTextField(20);
         JPanel doiInputs = new JPanel();
         doiInputs.add(articleDoiLabel);

@@ -6,13 +6,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DeleteForm implements ActionListener {
+    private Bibliography bibliography;
     private JPanel deleteForm;
     private CardLayout cardLayout;
     private JPanel cardContainer;
     private JTextField citeKeyInput;
     private JButton deleteSubmitBtn;
 
-    public DeleteForm(JPanel cardContainer){
+    public DeleteForm(Bibliography bibliography, JPanel cardContainer){
+        this.bibliography = bibliography;
         this.cardContainer = cardContainer;
         this.cardLayout = (CardLayout) cardContainer.getLayout();
         this.deleteForm = new JPanel(new GridLayout(2, 1));
@@ -20,7 +22,7 @@ public class DeleteForm implements ActionListener {
         JPanel deleteFormBody = new JPanel(new FlowLayout());
 
         // Set title message
-        JLabel deleteFormMessage = new JLabel("Select an entry's citeKey to delete it");
+        JLabel deleteFormMessage = new JLabel("Enter an entry's citeKey to delete it");
         deleteFormTitle.add(deleteFormMessage);
 
         // Set form elements
@@ -44,7 +46,9 @@ public class DeleteForm implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == deleteSubmitBtn) {
-            System.out.println("Deleting entry with citeKey: " + citeKeyInput.getText());
+            String citeKey = citeKeyInput.getText();
+            System.out.println("Deleting entry with citeKey: " + citeKey);
+            bibliography.deleteEntry(citeKey);
             cardLayout.show(cardContainer, "defaultCard");
         }
     }

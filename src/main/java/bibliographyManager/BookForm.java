@@ -18,7 +18,7 @@ public class BookForm implements ActionListener {
     public BookForm(JPanel cardContainer) {
         this.cardContainer = cardContainer;
         this.cardLayout = (CardLayout) cardContainer.getLayout();
-        this.bookForm = new JPanel(new GridLayout(2, 1));
+        this.bookForm = new JPanel(new GridLayout(3, 1));
         JPanel bookFormTitle = new JPanel(new FlowLayout());
         JPanel bookFormBody = new JPanel(new GridLayout(5,1));
 

@@ -40,7 +40,7 @@ public class GUIBibManager implements ActionListener {
         bibliography = new Bibliography();
 
         frame = new JFrame("Bibliography Management System");
-        frame.setLayout(new GridLayout(2, 1));
+        frame.setLayout(new BorderLayout());
         frame.setSize(800, 800);
 
         // Add panels
@@ -54,7 +54,7 @@ public class GUIBibManager implements ActionListener {
     public void addAdminPanel(JFrame frame) {
         adminPanel = new JPanel();
         adminPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
-        adminPanel.setPreferredSize(new Dimension(800, 400));
+        adminPanel.setPreferredSize(new Dimension(800, 200));
         adminPanel.setBackground(Color.DARK_GRAY);
 
         // Create buttons
@@ -82,7 +82,7 @@ public class GUIBibManager implements ActionListener {
         adminPanel.add(quitBtn);
 
         // Add panel to frame
-        frame.add(adminPanel);
+        frame.add(adminPanel, BorderLayout.PAGE_START);
     }
 
     public void addCardContainer(JFrame frame) {
@@ -110,22 +110,22 @@ public class GUIBibManager implements ActionListener {
         JLabel entriesLabel = new JLabel("Bibliography Entries");
         viewEntries.add(entriesLabel);
 
-        // Add cards
+        // Add cards to cardContainer
         cardContainer.add(defaultCard, "defaultCard");
         cardContainer.add(loadFile, "loadFile");
         cardContainer.add(saveToFile, "saveToFile");
         cardContainer.add(viewEntries, "viewEntries");
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
-
+        addBookForm(cardContainer);
         addArticleForm(cardContainer);
         addTechnicalReportForm(cardContainer);
 
-        // Add panel to frame
-        frame.add(cardContainer);
+        // Add cardContainer to frame
+        frame.add(cardContainer, BorderLayout.CENTER);
     }
 
-    public void showBookForm(JPanel cardContainer) {
+    public void addBookForm(JPanel cardContainer) {
         BookForm bookForm = new BookForm(cardContainer);
         cardContainer.add(bookForm.getBookForm(), "bookForm");
     }
@@ -141,7 +141,7 @@ public class GUIBibManager implements ActionListener {
     }
 
     public void addDeleteForm(JPanel cardContainer) {
-        DeleteForm deleteForm = new DeleteForm(cardContainer);
+        DeleteForm deleteForm = new DeleteForm(bibliography, cardContainer);
         cardContainer.add(deleteForm.getDeleteForm(), "deleteForm");
     }
 
@@ -179,78 +179,60 @@ public class GUIBibManager implements ActionListener {
         CardLayout cardLayout = (CardLayout) cardContainer.getLayout();
 
         if (e.getSource() == loadFileBtn) {
-            System.out.println("Load File button selected");
             cardLayout.show(cardContainer, "loadFile");
         }
         if (e.getSource() == saveToFileBtn) {
-            System.out.println("Save to File button selected");
             cardLayout.show(cardContainer, "saveToFile");
         }
         if (e.getSource() == deleteEntryBtn) {
-            System.out.println("Delete Entry button selected");
             cardLayout.show(cardContainer, "deleteForm");
         }
         if (e.getSource() == viewBibliographyBtn) {
-            System.out.println("View Bibliography button selected");
             cardLayout.show(cardContainer, "viewEntries");
         }
         if (e.getSource() == addEntryBtn) {
-            System.out.println("Add Entry button selected");
             cardLayout.show(cardContainer, "entrySelection");
         }
         if (e.getSource() == bookBtn) {
-            System.out.println("Book button selected");
-            showBookForm(cardContainer);
             cardLayout.show(cardContainer, "bookForm");
         }
         if (e.getSource() == articleBtn) {
-            System.out.println("Article button selected");
             cardLayout.show(cardContainer, "articleForm");
         }
         if (e.getSource() == techReportBtn) {
-            System.out.println("Tech Report button selected");
             cardLayout.show(cardContainer, "technicalReportForm");
         }
         if (e.getSource() == quitBtn) {
-            System.out.println("Quit button selected");
             quit();
         }
     }
 
-    public void addEntry() {
-        // TODO
-        // Specify which type of entry
-        // Prompt entry of details
-        // Take in details
-        // Save details to bibliography
-    }
-
-    public void deleteEntry(String citeKey) {
-        // TODO
-        // Find entry based off citeKey
-        // Delete entry
-    }
-
     public void viewEntries() {
-        // TODO
-        // Get all entries in Harvard Style format
-        // Order by year published by most recent
-        // Render to GUI
-
+        // TODO Order by year published by most recent
+        System.out.println(bibliography.getEntriesHarvardStyle());
     }
 
+    /**
+     * Reading from file functionality is not required in the assignment
+     * @param filename
+     */
     public void readFromFile(String filename) {
-        // TODO
-        // Mock reading from file
-        // Terminate program
+        System.out.println("Reading from file");
         quit();
     }
 
+    /**
+     * Saves bibliography's entries to .txt file in Harvard format
+     * @param filename
+     */
     public void saveToFile(String filename) {
         System.out.println("Saving bibliography to file...");
         bibliography.saveToFile(filename);
     }
 
+    /**
+     * Terminates the program
+     */
     public void quit() {
         // Terminate system with exit code 0
         System.exit(0);

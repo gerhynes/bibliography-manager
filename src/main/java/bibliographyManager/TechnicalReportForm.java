@@ -18,7 +18,7 @@ public class TechnicalReportForm implements ActionListener {
     public TechnicalReportForm(JPanel cardContainer){
         this.cardContainer = cardContainer;
         this.cardLayout = (CardLayout) cardContainer.getLayout();
-        this.technicalReportForm = new JPanel(new GridLayout(2, 1));
+        this.technicalReportForm = new JPanel(new GridLayout(3, 1));
         JPanel technicalReportFormTitle = new JPanel(new FlowLayout());
         JPanel technicalReportFormBody = new JPanel(new GridLayout(5,1));
 
