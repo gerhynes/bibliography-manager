@@ -6,22 +6,52 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BookForm implements ActionListener {
-    private Bibliography bibliography;
-    private ConcreteBibItemFactory bibItemFactory;
+    private JFrame frame;
     private JPanel bookForm;
-    private CardLayout cardLayout;
-    private JPanel cardContainer;
     private JTextField bookAuthorInput;
     private JTextField bookTitleInput;
     private JTextField bookYearInput;
     private JTextField bookPublisherInput;
     private JButton bookSubmitBtn;
 
-    public BookForm(Bibliography bibliography, ConcreteBibItemFactory bibItemFactory, JPanel cardContainer) {
-        this.bibliography = bibliography;
-        this.bibItemFactory = bibItemFactory;
-        this.cardContainer = cardContainer;
-        this.cardLayout = (CardLayout) cardContainer.getLayout();
+
+    public JTextField getBookAuthorInput() {
+        return bookAuthorInput;
+    }
+
+    public void setBookAuthorInput(JTextField bookAuthorInput) {
+        this.bookAuthorInput = bookAuthorInput;
+    }
+
+    public JTextField getBookTitleInput() {
+        return bookTitleInput;
+    }
+
+    public void setBookTitleInput(JTextField bookTitleInput) {
+        this.bookTitleInput = bookTitleInput;
+    }
+
+    public JTextField getBookYearInput() {
+        return bookYearInput;
+    }
+
+    public void setBookYearInput(JTextField bookYearInput) {
+        this.bookYearInput = bookYearInput;
+    }
+
+    public JTextField getBookPublisherInput() {
+        return bookPublisherInput;
+    }
+
+    public void setBookPublisherInput(JTextField bookPublisherInput) {
+        this.bookPublisherInput = bookPublisherInput;
+    }
+
+    public BookForm() {
+        frame = new JFrame("Book Form");
+        frame.setLayout(new BorderLayout());
+        frame.setSize(800, 800);
+
         this.bookForm = new JPanel(new GridLayout(3, 1));
         JPanel bookFormTitle = new JPanel(new FlowLayout());
         JPanel bookFormBody = new JPanel(new GridLayout(5,1));
@@ -70,6 +100,11 @@ public class BookForm implements ActionListener {
         // Add title and body
         bookForm.add(bookFormTitle);
         bookForm.add(bookFormBody);
+
+        // Add form to frame
+        frame.add(bookForm);
+
+        frame.setVisible(true);
     }
 
     public JPanel getBookForm() {
@@ -90,14 +125,6 @@ public class BookForm implements ActionListener {
             String publisher = bookPublisherInput.getText();
 
             System.out.println("title: " + title + " author: " + author + " year: " + year + " publisher: " + publisher);
-
-            // Call bibItemFactory to create BookBitItem
-            bibItemFactory.createBibItem("book");
-
-            // Pass created BookBibItem and its citeKey to the bibliography
-//            bibliography.addEntry(citeKey, BookBookBibItem);
-
-            cardLayout.show(cardContainer, "defaultCard");
         }
     }
 }

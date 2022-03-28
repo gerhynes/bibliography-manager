@@ -9,6 +9,7 @@ import java.util.HashMap;
 public class GUIBibManager implements ActionListener {
     private Bibliography bibliography;
     private ConcreteBibItemFactory bibItemFactory;
+    HashMap<String, ItemInputStrategy> inputStrategies;
     private JFrame frame;
     private JPanel adminPanel;
     private JButton loadFileBtn;
@@ -34,13 +35,13 @@ public class GUIBibManager implements ActionListener {
         bibliography = new Bibliography();
 
         // Generate available input strategies
-        HashMap<String, ItemInputStrategy> inputStrategies = new HashMap<>();
+        inputStrategies = new HashMap<>();
         inputStrategies.put("bookStrategy", new BookGUIInputStrategy());
         inputStrategies.put("articleStrategy", new ArticleGUIInputStrategy());
         inputStrategies.put("techReportStrategy", new TechReportGUIInputStrategy());
 
         // Create factory with available strategies
-        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory(inputStrategies);
+        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
 
         frame = new JFrame("Bibliography Management System");
         frame.setLayout(new BorderLayout());
@@ -115,7 +116,7 @@ public class GUIBibManager implements ActionListener {
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
         addFileNameForm(cardContainer);
-        addBookForm(cardContainer);
+//        addBookForm(cardContainer);
         addArticleForm(cardContainer);
         addTechnicalReportForm(cardContainer);
 
@@ -123,10 +124,10 @@ public class GUIBibManager implements ActionListener {
         frame.add(cardContainer, BorderLayout.CENTER);
     }
 
-    public void addBookForm(JPanel cardContainer) {
-        BookForm bookForm = new BookForm(bibliography, bibItemFactory, cardContainer);
-        cardContainer.add(bookForm.getBookForm(), "bookForm");
-    }
+//    public void addBookForm(JPanel cardContainer) {
+//        BookForm bookForm = new BookForm();
+//        cardContainer.add(bookForm.getBookForm(), "bookForm");
+//    }
 
     public void addArticleForm(JPanel cardContainer) {
         ArticleForm articleForm = new ArticleForm(bibliography, bibItemFactory, cardContainer);
@@ -201,7 +202,7 @@ public class GUIBibManager implements ActionListener {
             cardLayout.show(cardContainer, "entrySelection");
         }
         if (e.getSource() == bookBtn) {
-            cardLayout.show(cardContainer, "bookForm");
+            createBook();
         }
         if (e.getSource() == articleBtn) {
             cardLayout.show(cardContainer, "articleForm");
@@ -239,5 +240,16 @@ public class GUIBibManager implements ActionListener {
         System.exit(0);
         // Prevent any further code from running while system terminates
         return;
+    }
+
+    private void createBook(){
+        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
+
+        BibItem book = bibItemFactory.createBibItem("book");
+        if (book != null){
+            bibliography.addEntry(book);
+        } else {
+            System.out.println("Item is null");
+        }
     }
 }

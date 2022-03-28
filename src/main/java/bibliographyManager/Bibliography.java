@@ -28,8 +28,8 @@ public class Bibliography {
         this.bibFileReader = bibFileReader;
     }
 
-    public void addEntry(String citeKey, BibItem entry) {
-        this.entries.put(citeKey, entry);
+    public void addEntry(BibItem entry) {
+        this.entries.put(entry.getCiteKey(), entry);
     }
 
     public void deleteEntry(String citeKey){
