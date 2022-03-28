@@ -100,11 +100,6 @@ public class GUIBibManager implements ActionListener {
         JLabel loadFileMessage = new JLabel("Loading file...");
         loadFile.add(loadFileMessage);
 
-        // Save to File Card
-        JPanel saveToFile = new JPanel();
-        JLabel saveToFileMessage = new JLabel("Saving to file...");
-        saveToFile.add(saveToFileMessage);
-
         // View Entries Card
         JPanel viewEntries = new JPanel();
         JLabel entriesLabel = new JLabel("Bibliography Entries");
@@ -113,10 +108,10 @@ public class GUIBibManager implements ActionListener {
         // Add cards to cardContainer
         cardContainer.add(defaultCard, "defaultCard");
         cardContainer.add(loadFile, "loadFile");
-        cardContainer.add(saveToFile, "saveToFile");
         cardContainer.add(viewEntries, "viewEntries");
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
+        addFileNameForm(cardContainer);
         addBookForm(cardContainer);
         addArticleForm(cardContainer);
         addTechnicalReportForm(cardContainer);
@@ -143,6 +138,11 @@ public class GUIBibManager implements ActionListener {
     public void addDeleteForm(JPanel cardContainer) {
         DeleteForm deleteForm = new DeleteForm(bibliography, cardContainer);
         cardContainer.add(deleteForm.getDeleteForm(), "deleteForm");
+    }
+
+    public void addFileNameForm(JPanel cardContainer) {
+        FileNameForm fileNameForm = new FileNameForm(bibliography, cardContainer);
+        cardContainer.add(fileNameForm.getFileNameForm(), "fileNameForm");
     }
 
     public void addEntrySelectionForm(JPanel cardContainer) {
@@ -182,7 +182,7 @@ public class GUIBibManager implements ActionListener {
             cardLayout.show(cardContainer, "loadFile");
         }
         if (e.getSource() == saveToFileBtn) {
-            cardLayout.show(cardContainer, "saveToFile");
+            cardLayout.show(cardContainer, "fileNameForm");
         }
         if (e.getSource() == deleteEntryBtn) {
             cardLayout.show(cardContainer, "deleteForm");
@@ -219,15 +219,6 @@ public class GUIBibManager implements ActionListener {
     public void readFromFile(String filename) {
         System.out.println("Reading from file");
         quit();
-    }
-
-    /**
-     * Saves bibliography's entries to .txt file in Harvard format
-     * @param filename
-     */
-    public void saveToFile(String filename) {
-        System.out.println("Saving bibliography to file...");
-        bibliography.saveToFile(filename);
     }
 
     /**

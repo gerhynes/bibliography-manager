@@ -66,8 +66,9 @@ public class Bibliography {
      */
     public void saveToFile(String fileName) {
         try {
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName + ".txt"));
+            BufferedWriter writer = new BufferedWriter(new FileWriter("src\\main\\resources\\" + fileName + ".txt"));
             writer.write(getEntriesBibTeXStyle());
+            writer.write("Helloo");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
