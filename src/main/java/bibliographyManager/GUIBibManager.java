@@ -7,7 +7,8 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class GUIBibManager implements ActionListener {
-    Bibliography bibliography;
+    private Bibliography bibliography;
+    private ConcreteBibItemFactory bibItemFactory;
     private JFrame frame;
     private JPanel adminPanel;
     private JButton loadFileBtn;
@@ -23,6 +24,14 @@ public class GUIBibManager implements ActionListener {
 
     public static void main(String[] args) {
         GUIBibManager guiBibManager = new GUIBibManager();
+    }
+
+    /**
+     * Constructor to generate GUIBibManager
+     */
+    public GUIBibManager() {
+        // Instantiate bibliography singleton
+        bibliography = new Bibliography();
 
         // Generate available input strategies
         HashMap<String, ItemInputStrategy> inputStrategies = new HashMap<>();
@@ -32,12 +41,6 @@ public class GUIBibManager implements ActionListener {
 
         // Create factory with available strategies
         ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory(inputStrategies);
-    }
-
-    // Default constructor
-    public GUIBibManager() {
-        // Instantiate bibliography singleton
-        bibliography = new Bibliography();
 
         frame = new JFrame("Bibliography Management System");
         frame.setLayout(new BorderLayout());
@@ -121,17 +124,17 @@ public class GUIBibManager implements ActionListener {
     }
 
     public void addBookForm(JPanel cardContainer) {
-        BookForm bookForm = new BookForm(cardContainer);
+        BookForm bookForm = new BookForm(bibliography, bibItemFactory, cardContainer);
         cardContainer.add(bookForm.getBookForm(), "bookForm");
     }
 
     public void addArticleForm(JPanel cardContainer) {
-        ArticleForm articleForm = new ArticleForm(cardContainer);
+        ArticleForm articleForm = new ArticleForm(bibliography, bibItemFactory, cardContainer);
         cardContainer.add(articleForm.getArticleForm(), "articleForm");
     }
 
     public void addTechnicalReportForm(JPanel cardContainer) {
-        TechnicalReportForm technicalReportForm = new TechnicalReportForm(cardContainer);
+        TechnicalReportForm technicalReportForm = new TechnicalReportForm(bibliography, bibItemFactory, cardContainer);
         cardContainer.add(technicalReportForm.getTechnicalReportForm(), "technicalReportForm");
     }
 
@@ -174,6 +177,10 @@ public class GUIBibManager implements ActionListener {
         cardContainer.add(entrySelection, "entrySelection");
     }
 
+    /**
+     * Loads appropriate card based on button clicked
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         CardLayout cardLayout = (CardLayout) cardContainer.getLayout();
@@ -207,13 +214,16 @@ public class GUIBibManager implements ActionListener {
         }
     }
 
+    /**
+     * Prints the bibliography's entries in Harvard style
+     */
     public void viewEntries() {
-        // TODO Order by year published by most recent
+        System.out.println("Getting all bibliography entries");
         System.out.println(bibliography.getEntriesHarvardStyle());
     }
 
     /**
-     * Reading from file functionality is not required in the assignment
+     * Read from file functionality is not required in the assignment
      * @param filename
      */
     public void readFromFile(String filename) {

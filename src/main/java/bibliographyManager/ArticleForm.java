@@ -6,6 +6,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ArticleForm implements ActionListener {
+    private Bibliography bibliography;
+    private ConcreteBibItemFactory bibItemFactory;
     private JPanel articleForm;
     private CardLayout cardLayout;
     private JPanel cardContainer;
@@ -16,12 +18,14 @@ public class ArticleForm implements ActionListener {
     private JTextField articleDoiInput;
     private JButton articleSubmitBtn;
 
-    public ArticleForm(JPanel cardContainer){
+    public ArticleForm(Bibliography bibliography, ConcreteBibItemFactory bibItemFactory, JPanel cardContainer) {
+        this.bibliography = bibliography;
+        this.bibItemFactory = bibItemFactory;
         this.cardContainer = cardContainer;
         this.cardLayout = (CardLayout) cardContainer.getLayout();
         this.articleForm = new JPanel(new GridLayout(3, 1));
         JPanel articleFormTitle = new JPanel(new FlowLayout());
-        JPanel articleFormBody = new JPanel(new GridLayout(6,1));
+        JPanel articleFormBody = new JPanel(new GridLayout(6, 1));
 
         // Set title message
         JLabel bookFormMessage = new JLabel("Enter the article's details");
@@ -91,6 +95,12 @@ public class ArticleForm implements ActionListener {
             String doi = articleDoiInput.getText();
 
             System.out.println("title: " + title + " author: " + author + " year: " + year + " journal: " + journal + " doi: " + doi);
+
+            // Call bibItemFactory to create ArticleBibItem
+            bibItemFactory.createBibItem("article");
+
+            // Pass created ArticleBibItem and its citeKey to the bibliography
+//            bibliography.addEntry(citeKey, ArticleBibItem);
 
             cardLayout.show(cardContainer, "defaultCard");
         }

@@ -31,4 +31,10 @@ public class ArticleBibItemTests {
         // DOI after url prefix consists of two parts separated by /
         assertTrue(doi.substring(16).split("/").length == 2);
     }
+
+    @Test
+    public void testDoiUniqueSuffixExists() {
+        // DOI after url prefix and NN.NNNN/ is not empty
+        assertTrue(doi.substring(16).split("/")[1].length() > 0);
+    }
 }

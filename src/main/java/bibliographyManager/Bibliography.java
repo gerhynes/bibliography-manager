@@ -11,6 +11,8 @@ import java.util.*;
 public class Bibliography {
     private static Bibliography self;
 
+    private BibFileReader bibFileReader;
+
     private HashMap<String, BibItem> entries;
 
     protected Bibliography() {
@@ -20,6 +22,10 @@ public class Bibliography {
     public static Bibliography getInstance() {
         if (self == null) self = new Bibliography();
         return self;
+    }
+
+    public void setBibFileReader(BibFileReader bibFileReader){
+        this.bibFileReader = bibFileReader;
     }
 
     public void addEntry(String citeKey, BibItem entry) {
@@ -68,7 +74,6 @@ public class Bibliography {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("src\\main\\resources\\" + fileName + ".txt"));
             writer.write(getEntriesBibTeXStyle());
-            writer.write("Helloo");
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
