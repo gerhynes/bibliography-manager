@@ -6,7 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BookForm implements ActionListener {
-    private JFrame frame;
+    private JDialog dialog;
     private JPanel bookForm;
     private JTextField bookAuthorInput;
     private JTextField bookTitleInput;
@@ -48,9 +48,9 @@ public class BookForm implements ActionListener {
     }
 
     public BookForm() {
-        frame = new JFrame("Book Form");
-        frame.setLayout(new BorderLayout());
-        frame.setSize(800, 800);
+        dialog = new JDialog();
+        dialog.setLayout(new BorderLayout());
+        dialog.setSize(600, 600);
 
         this.bookForm = new JPanel(new GridLayout(3, 1));
         JPanel bookFormTitle = new JPanel(new FlowLayout());
@@ -61,7 +61,7 @@ public class BookForm implements ActionListener {
         bookFormTitle.add(bookFormMessage);
 
         // Set inputs
-        JLabel bookAuthorLabel = new JLabel("Enter Author");
+        JLabel bookAuthorLabel = new JLabel("Enter Author (Format: lastname, firstname)");
         bookAuthorInput = new JTextField(20);
         JPanel authorInputs = new JPanel();
         authorInputs.add(bookAuthorLabel);
@@ -102,9 +102,10 @@ public class BookForm implements ActionListener {
         bookForm.add(bookFormBody);
 
         // Add form to frame
-        frame.add(bookForm);
+        dialog.add(bookForm);
 
-        frame.setVisible(true);
+        dialog.setModal(true);
+        dialog.setVisible(true);
     }
 
     public JPanel getBookForm() {
@@ -125,6 +126,7 @@ public class BookForm implements ActionListener {
             String publisher = bookPublisherInput.getText();
 
             System.out.println("title: " + title + " author: " + author + " year: " + year + " publisher: " + publisher);
+            dialog.dispose();
         }
     }
 }

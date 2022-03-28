@@ -247,6 +247,7 @@ public class GUIBibManager implements ActionListener {
 
         BibItem book = bibItemFactory.createBibItem("book");
         if (book != null){
+            System.out.println("Adding book to bibliography");
             bibliography.addEntry(book);
         } else {
             System.out.println("Item is null");

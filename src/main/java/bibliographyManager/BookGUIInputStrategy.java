@@ -12,7 +12,7 @@ public class BookGUIInputStrategy extends GUIItemInputStrategy{
         int year = Integer.parseInt(bookForm.getBookYearInput().getText());
         String publisher = bookForm.getBookPublisherInput().getText();
 
-        book = new BookBibItem(title, author, year, publisher);
+        book = new BookBibItem(author, title, year, publisher);
 
         return book;
     }

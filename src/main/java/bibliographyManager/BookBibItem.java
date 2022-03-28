@@ -18,7 +18,7 @@ public class BookBibItem extends BibItem implements Comparable<BibItem>{
         this.title = title;
         this.publisher = publisher;
         this.year = year;
-        this.citeKey = author.substring(0, author.indexOf(' ')).toLowerCase() + year;
+        this.citeKey = author.substring(0, author.indexOf(",")).toLowerCase() + year;
     }
 
     public String getCiteKey() {
