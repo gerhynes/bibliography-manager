@@ -1,10 +1,14 @@
 package main.java.bibliographyManager;
 
 public class TechReportGUIInputStrategy extends GUIItemInputStrategy {
-    // Pass inputs as parameters
     public BibItem createBibItemFromInput() {
-        // Create and return TechnicalReportBibItem
-        TechnicalReportBibItem technicalReport = new TechnicalReportBibItem();
-        return technicalReport;
+        TechnicalReportForm technicalReportForm = new TechnicalReportForm();
+
+        String title = technicalReportForm.getTitle();
+        String author = technicalReportForm.getAuthor();
+        int year = technicalReportForm.getYear();
+        String institution = technicalReportForm.getInstitution();
+
+        return new TechnicalReportBibItem(author, title, year, institution);
     }
 }

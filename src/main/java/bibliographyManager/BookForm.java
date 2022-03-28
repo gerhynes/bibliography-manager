@@ -7,20 +7,24 @@ import java.awt.event.ActionListener;
 
 public class BookForm implements ActionListener {
     private JDialog dialog;
-    private JPanel bookForm;
     private JTextField bookAuthorInput;
     private JTextField bookTitleInput;
     private JTextField bookYearInput;
     private JTextField bookPublisherInput;
     private JButton bookSubmitBtn;
 
+    private String author;
+    private String title;
+    private int year;
+    private String publisher;
+
     public BookForm() {
         dialog = new JDialog();
         dialog.setSize(600, 600);
 
-        this.bookForm = new JPanel(new GridLayout(3, 1));
+        JPanel bookForm = new JPanel(new GridLayout(3, 1));
         JPanel bookFormTitle = new JPanel(new FlowLayout());
-        JPanel bookFormBody = new JPanel(new GridLayout(5,1));
+        JPanel bookFormBody = new JPanel(new GridLayout(5, 1));
 
         // Set title message
         JLabel bookFormMessage = new JLabel("Enter the book's details");
@@ -67,52 +71,52 @@ public class BookForm implements ActionListener {
         bookForm.add(bookFormTitle);
         bookForm.add(bookFormBody);
 
-        // Add form to frame
+        // Add form to dialog
         dialog.add(bookForm);
         dialog.setModal(true);
         dialog.setVisible(true);
     }
 
-    public JTextField getBookAuthorInput() {
-        return bookAuthorInput;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setBookAuthorInput(JTextField bookAuthorInput) {
-        this.bookAuthorInput = bookAuthorInput;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
-    public JTextField getBookTitleInput() {
-        return bookTitleInput;
+    public String getTitle() {
+        return title;
     }
 
-    public void setBookTitleInput(JTextField bookTitleInput) {
-        this.bookTitleInput = bookTitleInput;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public JTextField getBookYearInput() {
-        return bookYearInput;
+    public int getYear() {
+        return year;
     }
 
-    public void setBookYearInput(JTextField bookYearInput) {
-        this.bookYearInput = bookYearInput;
+    public void setYear(int year) {
+        this.year = year;
     }
 
-    public JTextField getBookPublisherInput() {
-        return bookPublisherInput;
+    public String getPublisher() {
+        return publisher;
     }
 
-    public void setBookPublisherInput(JTextField bookPublisherInput) {
-        this.bookPublisherInput = bookPublisherInput;
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bookSubmitBtn) {
             System.out.println("Book Submitted");
-            String title = bookTitleInput.getText();
-            String author = bookAuthorInput.getText();
-            int year = Integer.parseInt(bookYearInput.getText());
-            String publisher = bookPublisherInput.getText();
+            title = bookTitleInput.getText();
+            author = bookAuthorInput.getText();
+            year = Integer.parseInt(bookYearInput.getText());
+            publisher = bookPublisherInput.getText();
 
             System.out.println("title: " + title + " author: " + author + " year: " + year + " publisher: " + publisher);
             dialog.dispose();

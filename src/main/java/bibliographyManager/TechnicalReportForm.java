@@ -6,25 +6,25 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class TechnicalReportForm implements ActionListener {
-    private Bibliography bibliography;
-    private ConcreteBibItemFactory bibItemFactory;
-    private JPanel technicalReportForm;
-    private CardLayout cardLayout;
-    private JPanel cardContainer;
+    private JDialog dialog;
     private JTextField technicalReportAuthorInput;
     private JTextField technicalReportTitleInput;
     private JTextField technicalReportYearInput;
     private JTextField technicalReportInstitutionInput;
     private JButton technicalReportSubmitBtn;
 
-    public TechnicalReportForm(Bibliography bibliography, ConcreteBibItemFactory bibItemFactory, JPanel cardContainer){
-        this.bibliography = bibliography;
-        this.bibItemFactory = bibItemFactory;
-        this.cardContainer = cardContainer;
-        this.cardLayout = (CardLayout) cardContainer.getLayout();
-        this.technicalReportForm = new JPanel(new GridLayout(3, 1));
+    String title;
+    String author;
+    int year;
+    String institution;
+
+    public TechnicalReportForm() {
+        dialog = new JDialog();
+        dialog.setSize(600, 600);
+
+        JPanel technicalReportForm = new JPanel(new GridLayout(3, 1));
         JPanel technicalReportFormTitle = new JPanel(new FlowLayout());
-        JPanel technicalReportFormBody = new JPanel(new GridLayout(5,1));
+        JPanel technicalReportFormBody = new JPanel(new GridLayout(5, 1));
 
         // Set title message
         JLabel bookFormMessage = new JLabel("Enter the Technical Report's details");
@@ -70,30 +70,56 @@ public class TechnicalReportForm implements ActionListener {
         // Add title and body
         technicalReportForm.add(technicalReportFormTitle);
         technicalReportForm.add(technicalReportFormBody);
+
+        // Add form to dialog
+        dialog.add(technicalReportForm);
+        dialog.setModal(true);
+        dialog.setVisible(true);
     }
 
-    public JPanel getTechnicalReportForm() {
-        return this.technicalReportForm;
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public String getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(String institution) {
+        this.institution = institution;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == technicalReportSubmitBtn) {
             System.out.println("Technical Report Submitted");
-            String title = technicalReportTitleInput.getText();
-            String author = technicalReportAuthorInput.getText();
-            int year = Integer.parseInt(technicalReportYearInput.getText());
-            String institution = technicalReportInstitutionInput.getText();
+            title = technicalReportTitleInput.getText();
+            author = technicalReportAuthorInput.getText();
+            year = Integer.parseInt(technicalReportYearInput.getText());
+            institution = technicalReportInstitutionInput.getText();
 
             System.out.println("title: " + title + " author: " + author + " year: " + year + " institution: " + institution);
-
-            // Call bibItemFactory to create TechReportBibItem
-            bibItemFactory.createBibItem("techReport");
-
-            // Pass created TechReportBibItem and its citeKey to the bibliography
-//            bibliography.addEntry(citeKey, TechnicalReportBibItem);
-
-            cardLayout.show(cardContainer, "defaultCard");
+            dialog.dispose();
         }
     }
 }

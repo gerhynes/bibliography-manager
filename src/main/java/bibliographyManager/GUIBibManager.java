@@ -107,15 +107,9 @@ public class GUIBibManager implements ActionListener {
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
         addFileNameForm(cardContainer);
-        addTechnicalReportForm(cardContainer);
 
         // Add cardContainer to frame
         frame.add(cardContainer, BorderLayout.CENTER);
-    }
-
-    public void addTechnicalReportForm(JPanel cardContainer) {
-        TechnicalReportForm technicalReportForm = new TechnicalReportForm(bibliography, bibItemFactory, cardContainer);
-        cardContainer.add(technicalReportForm.getTechnicalReportForm(), "technicalReportForm");
     }
 
     public void addDeleteForm(JPanel cardContainer) {
@@ -159,6 +153,7 @@ public class GUIBibManager implements ActionListener {
 
     /**
      * Loads appropriate card based on button clicked
+     *
      * @param e
      */
     @Override
@@ -187,7 +182,7 @@ public class GUIBibManager implements ActionListener {
             createArticle();
         }
         if (e.getSource() == techReportBtn) {
-            cardLayout.show(cardContainer, "technicalReportForm");
+            createTechnicalReport();
         }
         if (e.getSource() == quitBtn) {
             quit();
@@ -240,6 +235,17 @@ public class GUIBibManager implements ActionListener {
         if (article != null) {
             System.out.println("Adding article to bibliography");
             bibliography.addEntry(article);
+        } else {
+            System.out.println("Item is null");
+        }
+    }
+
+    private void createTechnicalReport() {
+        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
+        BibItem techReport = bibItemFactory.createBibItem("techReport");
+        if (techReport != null) {
+            System.out.println("Adding technical report to bibliography");
+            bibliography.addEntry(techReport);
         } else {
             System.out.println("Item is null");
         }
