@@ -4,7 +4,6 @@ import javax.swing.*;
 
 public class BookGUIInputStrategy extends GUIItemInputStrategy{
     public BibItem createBibItemFromInput() {
-        BibItem book;
         BookForm bookForm = new BookForm();
 
         String title = bookForm.getBookTitleInput().getText();
@@ -12,7 +11,7 @@ public class BookGUIInputStrategy extends GUIItemInputStrategy{
         int year = Integer.parseInt(bookForm.getBookYearInput().getText());
         String publisher = bookForm.getBookPublisherInput().getText();
 
-        book = new BookBibItem(author, title, year, publisher);
+        BibItem book = new BookBibItem(author, title, year, publisher);
 
         return book;
     }

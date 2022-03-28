@@ -14,42 +14,8 @@ public class BookForm implements ActionListener {
     private JTextField bookPublisherInput;
     private JButton bookSubmitBtn;
 
-
-    public JTextField getBookAuthorInput() {
-        return bookAuthorInput;
-    }
-
-    public void setBookAuthorInput(JTextField bookAuthorInput) {
-        this.bookAuthorInput = bookAuthorInput;
-    }
-
-    public JTextField getBookTitleInput() {
-        return bookTitleInput;
-    }
-
-    public void setBookTitleInput(JTextField bookTitleInput) {
-        this.bookTitleInput = bookTitleInput;
-    }
-
-    public JTextField getBookYearInput() {
-        return bookYearInput;
-    }
-
-    public void setBookYearInput(JTextField bookYearInput) {
-        this.bookYearInput = bookYearInput;
-    }
-
-    public JTextField getBookPublisherInput() {
-        return bookPublisherInput;
-    }
-
-    public void setBookPublisherInput(JTextField bookPublisherInput) {
-        this.bookPublisherInput = bookPublisherInput;
-    }
-
     public BookForm() {
         dialog = new JDialog();
-        dialog.setLayout(new BorderLayout());
         dialog.setSize(600, 600);
 
         this.bookForm = new JPanel(new GridLayout(3, 1));
@@ -103,17 +69,40 @@ public class BookForm implements ActionListener {
 
         // Add form to frame
         dialog.add(bookForm);
-
         dialog.setModal(true);
         dialog.setVisible(true);
     }
 
-    public JPanel getBookForm() {
-        return this.bookForm;
+    public JTextField getBookAuthorInput() {
+        return bookAuthorInput;
     }
 
-    public BookBibItem createBookBibItem(String title, String author, int year, String publisher){
-        return new BookBibItem(title, author, year, publisher);
+    public void setBookAuthorInput(JTextField bookAuthorInput) {
+        this.bookAuthorInput = bookAuthorInput;
+    }
+
+    public JTextField getBookTitleInput() {
+        return bookTitleInput;
+    }
+
+    public void setBookTitleInput(JTextField bookTitleInput) {
+        this.bookTitleInput = bookTitleInput;
+    }
+
+    public JTextField getBookYearInput() {
+        return bookYearInput;
+    }
+
+    public void setBookYearInput(JTextField bookYearInput) {
+        this.bookYearInput = bookYearInput;
+    }
+
+    public JTextField getBookPublisherInput() {
+        return bookPublisherInput;
+    }
+
+    public void setBookPublisherInput(JTextField bookPublisherInput) {
+        this.bookPublisherInput = bookPublisherInput;
     }
 
     @Override

@@ -34,15 +34,6 @@ public class GUIBibManager implements ActionListener {
         // Instantiate bibliography singleton
         bibliography = new Bibliography();
 
-        // Generate available input strategies
-        inputStrategies = new HashMap<>();
-        inputStrategies.put("bookStrategy", new BookGUIInputStrategy());
-        inputStrategies.put("articleStrategy", new ArticleGUIInputStrategy());
-        inputStrategies.put("techReportStrategy", new TechReportGUIInputStrategy());
-
-        // Create factory with available strategies
-        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
-
         frame = new JFrame("Bibliography Management System");
         frame.setLayout(new BorderLayout());
         frame.setSize(800, 800);
@@ -116,22 +107,10 @@ public class GUIBibManager implements ActionListener {
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
         addFileNameForm(cardContainer);
-//        addBookForm(cardContainer);
-        addArticleForm(cardContainer);
         addTechnicalReportForm(cardContainer);
 
         // Add cardContainer to frame
         frame.add(cardContainer, BorderLayout.CENTER);
-    }
-
-//    public void addBookForm(JPanel cardContainer) {
-//        BookForm bookForm = new BookForm();
-//        cardContainer.add(bookForm.getBookForm(), "bookForm");
-//    }
-
-    public void addArticleForm(JPanel cardContainer) {
-        ArticleForm articleForm = new ArticleForm(bibliography, bibItemFactory, cardContainer);
-        cardContainer.add(articleForm.getArticleForm(), "articleForm");
     }
 
     public void addTechnicalReportForm(JPanel cardContainer) {
@@ -205,7 +184,7 @@ public class GUIBibManager implements ActionListener {
             createBook();
         }
         if (e.getSource() == articleBtn) {
-            cardLayout.show(cardContainer, "articleForm");
+            createArticle();
         }
         if (e.getSource() == techReportBtn) {
             cardLayout.show(cardContainer, "technicalReportForm");
@@ -225,6 +204,7 @@ public class GUIBibManager implements ActionListener {
 
     /**
      * Read from file functionality is not required in the assignment
+     *
      * @param filename
      */
     public void readFromFile(String filename) {
@@ -242,13 +222,24 @@ public class GUIBibManager implements ActionListener {
         return;
     }
 
-    private void createBook(){
+    private void createBook() {
         ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
 
         BibItem book = bibItemFactory.createBibItem("book");
-        if (book != null){
+        if (book != null) {
             System.out.println("Adding book to bibliography");
             bibliography.addEntry(book);
+        } else {
+            System.out.println("Item is null");
+        }
+    }
+
+    private void createArticle() {
+        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
+        BibItem article = bibItemFactory.createBibItem("article");
+        if (article != null) {
+            System.out.println("Adding article to bibliography");
+            bibliography.addEntry(article);
         } else {
             System.out.println("Item is null");
         }
