@@ -16,9 +16,6 @@ public class GUIBibManager implements ActionListener {
     private JButton viewBibliographyBtn;
     private JButton quitBtn;
     private JPanel cardContainer;
-    private JButton bookBtn;
-    private JButton articleBtn;
-    private JButton techReportBtn;
     private JTextArea textArea;
 
     /**
@@ -153,32 +150,8 @@ public class GUIBibManager implements ActionListener {
     }
 
     public void addEntrySelectionForm(JPanel cardContainer) {
-        // Entry Selection Card
-        JPanel entrySelection = new JPanel(new GridLayout(2, 1));
-        JPanel selectionTitle = new JPanel(new FlowLayout());
-        JPanel selectionBody = new JPanel(new FlowLayout());
-        JLabel entrySelectionMessage = new JLabel("Select an entry type...");
-        selectionTitle.add(entrySelectionMessage);
-
-        // Create buttons
-        bookBtn = new JButton("Add Book");
-        articleBtn = new JButton("Add Article");
-        techReportBtn = new JButton("Add Technical Report");
-
-        // Add action listeners
-        bookBtn.addActionListener(this);
-        articleBtn.addActionListener(this);
-        techReportBtn.addActionListener(this);
-
-        // Add buttons to panel
-        selectionBody.add(bookBtn);
-        selectionBody.add(articleBtn);
-        selectionBody.add(techReportBtn);
-
-        entrySelection.add(selectionTitle);
-        entrySelection.add(selectionBody);
-
-        cardContainer.add(entrySelection, "entrySelection");
+        EntrySelectionForm entrySelectionForm = new EntrySelectionForm(bibliography, cardContainer);
+        cardContainer.add(entrySelectionForm.getEntrySelectionForm(), "entrySelection");
     }
 
     public void addEntriesDisplayPanel(JPanel cardContainer){
@@ -215,32 +188,21 @@ public class GUIBibManager implements ActionListener {
         if (e.getSource() == addEntryBtn) {
             cardLayout.show(cardContainer, "entrySelection");
         }
-        if (e.getSource() == bookBtn) {
-            createBook();
-        }
-        if (e.getSource() == articleBtn) {
-            createArticle();
-        }
-        if (e.getSource() == techReportBtn) {
-            createTechnicalReport();
-        }
         if (e.getSource() == quitBtn) {
             quit();
         }
     }
 
     /**
-     * Prints the bibliography's entries in Harvard style
+     * Displays the bibliography's entries in Harvard style
      */
     public void viewEntries() {
         System.out.println("Getting all bibliography entries");
-        System.out.println(bibliography.getEntriesHarvardStyle());
         textArea.setText(bibliography.getEntriesHarvardStyle());
     }
 
     /**
      * Read from file functionality is not required in the assignment
-     *
      * @param filename
      */
     public void readFromFile(String filename) {
@@ -256,39 +218,5 @@ public class GUIBibManager implements ActionListener {
         System.exit(0);
         // Prevent any further code from running while system terminates
         return;
-    }
-
-    private void createBook() {
-        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
-
-        BibItem book = bibItemFactory.createBibItem("book");
-        if (book != null) {
-            System.out.println("Adding book to bibliography");
-            bibliography.addEntry(book);
-        } else {
-            System.out.println("Item is null");
-        }
-    }
-
-    private void createArticle() {
-        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
-        BibItem article = bibItemFactory.createBibItem("article");
-        if (article != null) {
-            System.out.println("Adding article to bibliography");
-            bibliography.addEntry(article);
-        } else {
-            System.out.println("Item is null");
-        }
-    }
-
-    private void createTechnicalReport() {
-        ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
-        BibItem techReport = bibItemFactory.createBibItem("techReport");
-        if (techReport != null) {
-            System.out.println("Adding technical report to bibliography");
-            bibliography.addEntry(techReport);
-        } else {
-            System.out.println("Item is null");
-        }
     }
 }
