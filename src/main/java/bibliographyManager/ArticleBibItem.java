@@ -8,16 +8,12 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
     int year;
     String journal;
 
-    public ArticleBibItem() {
-
-    }
-
     public ArticleBibItem(String author, String title, int year, String journal, String doi) {
         this.author = author;
         this.title = title;
         this.year = year;
         this.journal = journal;
-        this.citeKey = author.substring(0, author.indexOf(' ')) + String.valueOf(year).substring(2) + journal.substring(0, journal.indexOf(' ')).toLowerCase();
+        this.citeKey = author.substring(0, author.indexOf(",")) + String.valueOf(year).substring(2) + journal.substring(0, journal.indexOf(' ')).toLowerCase();
         this.doi = "https://doi.org/" + doi;
     }
 

@@ -9,10 +9,6 @@ public class BookBibItem extends BibItem implements Comparable<BibItem>{
     int year;
     String publisher;
 
-    public BookBibItem(){
-
-    }
-
     public BookBibItem(String author, String title, int year, String publisher){
         this.author = author;
         this.title = title;

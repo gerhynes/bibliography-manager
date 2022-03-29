@@ -8,8 +8,6 @@ import java.util.HashMap;
 
 public class GUIBibManager implements ActionListener {
     private Bibliography bibliography;
-    private ConcreteBibItemFactory bibItemFactory;
-    HashMap<String, ItemInputStrategy> inputStrategies;
     private JFrame frame;
     private JPanel adminPanel;
     private JButton loadFileBtn;
@@ -22,6 +20,7 @@ public class GUIBibManager implements ActionListener {
     private JButton bookBtn;
     private JButton articleBtn;
     private JButton techReportBtn;
+    private JTextArea textArea;
 
     public static void main(String[] args) {
         GUIBibManager guiBibManager = new GUIBibManager();
@@ -34,6 +33,9 @@ public class GUIBibManager implements ActionListener {
         // Instantiate bibliography singleton
         bibliography = new Bibliography();
 
+        // Add sample entries to bibliography
+        addDemoEntries();
+
         frame = new JFrame("Bibliography Management System");
         frame.setLayout(new BorderLayout());
         frame.setSize(800, 800);
@@ -45,6 +47,23 @@ public class GUIBibManager implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
     }
+
+    public void addDemoEntries(){
+        BookBibItem book = new BookBibItem("Rothfuss, Patrick", "The Wise Man's Fear", 2011, "Tor");
+        ArticleBibItem article  = new ArticleBibItem("Bogue, Lorna", "Ringfort Conservation", 2019, "Eriu 57 (1)", "10.1007/54321");
+        TechnicalReportBibItem technicalReport = new TechnicalReportBibItem("Lenihan, Eddie", "Curlew Conservation on the Mid Shannon", 2020, "NPWS");
+        BookBibItem book2 = new BookBibItem("Rothfuss, Patrick", "The Wise Man's Fear", 2011, "Tor");
+        ArticleBibItem article2  = new ArticleBibItem("Bogue, Lorna", "Ringfort Conservation", 2019, "Eriu 57 (1)", "10.1007/54321");
+        TechnicalReportBibItem technicalReport2 = new TechnicalReportBibItem("Lenihan, Eddie", "Curlew Conservation on the Mid Shannon", 2020, "NPWS");
+
+        bibliography.addEntry(book);
+        bibliography.addEntry(article);
+        bibliography.addEntry(technicalReport);
+        bibliography.addEntry(book2);
+        bibliography.addEntry(article2);
+        bibliography.addEntry(technicalReport2);
+    }
+
 
     public void addAdminPanel(JFrame frame) {
         adminPanel = new JPanel();
@@ -95,18 +114,18 @@ public class GUIBibManager implements ActionListener {
         JLabel loadFileMessage = new JLabel("Loading file...");
         loadFile.add(loadFileMessage);
 
-        // View Entries Card
-        JPanel viewEntries = new JPanel();
-        JLabel entriesLabel = new JLabel("Bibliography Entries");
-        viewEntries.add(entriesLabel);
+//        // View Entries Card
+//        JPanel viewEntries = new JPanel();
+//        JLabel entriesLabel = new JLabel("Bibliography Entries");
+//        viewEntries.add(entriesLabel);
 
         // Add cards to cardContainer
         cardContainer.add(defaultCard, "defaultCard");
         cardContainer.add(loadFile, "loadFile");
-        cardContainer.add(viewEntries, "viewEntries");
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
         addFileNameForm(cardContainer);
+        addEntriesDisplayPanel(cardContainer);
 
         // Add cardContainer to frame
         frame.add(cardContainer, BorderLayout.CENTER);
@@ -151,6 +170,15 @@ public class GUIBibManager implements ActionListener {
         cardContainer.add(entrySelection, "entrySelection");
     }
 
+    public void addEntriesDisplayPanel(JPanel cardContainer){
+        JPanel viewEntries = new JPanel();
+        textArea = new JTextArea();
+        JScrollPane scrollPane = new JScrollPane(textArea);
+        viewEntries.add(scrollPane);
+
+        cardContainer.add(viewEntries, "viewEntries");
+    }
+
     /**
      * Loads appropriate card based on button clicked
      *
@@ -170,6 +198,7 @@ public class GUIBibManager implements ActionListener {
             cardLayout.show(cardContainer, "deleteForm");
         }
         if (e.getSource() == viewBibliographyBtn) {
+            viewEntries();
             cardLayout.show(cardContainer, "viewEntries");
         }
         if (e.getSource() == addEntryBtn) {
@@ -195,6 +224,7 @@ public class GUIBibManager implements ActionListener {
     public void viewEntries() {
         System.out.println("Getting all bibliography entries");
         System.out.println(bibliography.getEntriesHarvardStyle());
+        textArea.setText(bibliography.getEntriesHarvardStyle());
     }
 
     /**

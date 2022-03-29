@@ -7,16 +7,12 @@ public class TechnicalReportBibItem extends BibItem implements Comparable<BibIte
     int year;
     String institution;
 
-    public TechnicalReportBibItem() {
-
-    }
-
     public TechnicalReportBibItem(String author, String title, int year, String institution) {
         this.author = author;
         this.title = title;
         this.year = year;
         this.institution = institution;
-        this.citeKey = author.substring(0, author.indexOf(' ')) + ":" + year;
+        this.citeKey = author.substring(0, author.indexOf(",")) + ":" + year;
     }
 
     public String getCiteKey() {
