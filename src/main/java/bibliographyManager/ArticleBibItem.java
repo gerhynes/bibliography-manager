@@ -1,5 +1,6 @@
 package main.java.bibliographyManager;
 
+
 public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
     String citeKey;
     String doi;
@@ -49,7 +50,6 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
         this.title = title;
     }
 
-    @Override
     public int getYear() {
         return year;
     }
@@ -82,6 +82,6 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
 
     @Override
     public int compareTo(BibItem nextItem) {
-        return Integer.compare(this.getYear(), nextItem.getYear());
+        return Integer.compare(nextItem.getYear(), this.getYear());
     }
 }

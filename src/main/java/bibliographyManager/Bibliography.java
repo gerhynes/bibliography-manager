@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Bibliography - Singleton
+ * Bibliography - Singleton for storing and accessing bibliography entries
  */
 public class Bibliography {
     private static Bibliography self;
@@ -16,7 +16,7 @@ public class Bibliography {
     private HashMap<String, BibItem> entries;
 
     protected Bibliography() {
-        this.entries = new HashMap<>();
+        this.entries = new HashMap<String, BibItem>();
     }
 
     public static Bibliography getInstance() {
@@ -36,32 +36,33 @@ public class Bibliography {
         entries.remove(citeKey);
     }
 
-    public Map<String, BibItem> getEntries() {
-        return Collections.unmodifiableMap(this.entries);
-    }
-
     /**
-     * Iterates over entries and generates string representation in Harvard style
-     *
+     * Sorts entries by year and generates string representation in Harvard style separated by blank line
      * @return
      */
     public String getEntriesHarvardStyle() {
         String res = "";
-        for (Map.Entry<String, BibItem> entry : this.entries.entrySet()) {
-            res += entry.getValue().toHarvardStyle() + "\n\n";
+
+        ArrayList<BibItem> entryList = new ArrayList<>(entries.values());
+        entryList.sort(new SortedByYear());
+
+        for(BibItem item : entryList) {
+            res +=item.toHarvardStyle() + "\n\n";
         }
         return res;
     }
 
     /**
-     * Iterates over entries and generates string representation in BibTeX style separated by blank line
+     * Sorts entries by year and generates string representation in BibTeX style separated by blank line
      * @return
      */
     public String getEntriesBibTeXStyle() {
         String res = "";
-        for (Map.Entry<String, BibItem> entry : this.entries.entrySet()) {
-            // Append entries in BibTeX format with line between them
-            res += entry.getValue().toBibTeX() + "\n\n";
+        ArrayList<BibItem> entryList = new ArrayList<>(entries.values());
+        entryList.sort(new SortedByYear());
+
+        for(BibItem item : entryList) {
+            res +=item.toBibTeX() + "\n\n";
         }
         return res;
     }

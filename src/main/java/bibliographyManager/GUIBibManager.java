@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
 
 public class GUIBibManager implements ActionListener {
     private Bibliography bibliography;
@@ -22,6 +21,10 @@ public class GUIBibManager implements ActionListener {
     private JButton techReportBtn;
     private JTextArea textArea;
 
+    /**
+     * Instantiates GUIBibManager
+     * @param args
+     */
     public static void main(String[] args) {
         GUIBibManager guiBibManager = new GUIBibManager();
     }
@@ -36,6 +39,7 @@ public class GUIBibManager implements ActionListener {
         // Add sample entries to bibliography
         addDemoEntries();
 
+        // Create frame
         frame = new JFrame("Bibliography Management System");
         frame.setLayout(new BorderLayout());
         frame.setSize(800, 800);
@@ -48,23 +52,23 @@ public class GUIBibManager implements ActionListener {
         frame.setVisible(true);
     }
 
+    /**
+     * Adds sample book, article and technical report to the bibliography
+     */
     public void addDemoEntries(){
         BookBibItem book = new BookBibItem("Rothfuss, Patrick", "The Wise Man's Fear", 2011, "Tor");
         ArticleBibItem article  = new ArticleBibItem("Bogue, Lorna", "Ringfort Conservation", 2019, "Eriu 57 (1)", "10.1007/54321");
-        TechnicalReportBibItem technicalReport = new TechnicalReportBibItem("Lenihan, Eddie", "Curlew Conservation on the Mid Shannon", 2020, "NPWS");
-        BookBibItem book2 = new BookBibItem("Rothfuss, Patrick", "The Wise Man's Fear", 2011, "Tor");
-        ArticleBibItem article2  = new ArticleBibItem("Bogue, Lorna", "Ringfort Conservation", 2019, "Eriu 57 (1)", "10.1007/54321");
-        TechnicalReportBibItem technicalReport2 = new TechnicalReportBibItem("Lenihan, Eddie", "Curlew Conservation on the Mid Shannon", 2020, "NPWS");
+        TechnicalReportBibItem technicalReport = new TechnicalReportBibItem("Lenihan, Eddie", "Curlew Conservation on the Mid Shannon", 2005, "NPWS");
 
         bibliography.addEntry(book);
         bibliography.addEntry(article);
         bibliography.addEntry(technicalReport);
-        bibliography.addEntry(book2);
-        bibliography.addEntry(article2);
-        bibliography.addEntry(technicalReport2);
     }
 
-
+    /**
+     * Generates admin panel and adds to frame
+     * @param frame
+     */
     public void addAdminPanel(JFrame frame) {
         adminPanel = new JPanel();
         adminPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 10));
@@ -99,6 +103,10 @@ public class GUIBibManager implements ActionListener {
         frame.add(adminPanel, BorderLayout.PAGE_START);
     }
 
+    /**
+     * Generates card container for forms and outputs and adds to frame
+     * @param frame
+     */
     public void addCardContainer(JFrame frame) {
         cardContainer = new JPanel(new CardLayout());
         cardContainer.setPreferredSize(new Dimension(800, 400));
@@ -114,11 +122,6 @@ public class GUIBibManager implements ActionListener {
         JLabel loadFileMessage = new JLabel("Loading file...");
         loadFile.add(loadFileMessage);
 
-//        // View Entries Card
-//        JPanel viewEntries = new JPanel();
-//        JLabel entriesLabel = new JLabel("Bibliography Entries");
-//        viewEntries.add(entriesLabel);
-
         // Add cards to cardContainer
         cardContainer.add(defaultCard, "defaultCard");
         cardContainer.add(loadFile, "loadFile");
@@ -131,11 +134,19 @@ public class GUIBibManager implements ActionListener {
         frame.add(cardContainer, BorderLayout.CENTER);
     }
 
+    /**
+     * Generates delete form and adds to frame
+     * @param cardContainer
+     */
     public void addDeleteForm(JPanel cardContainer) {
         DeleteForm deleteForm = new DeleteForm(bibliography, cardContainer);
         cardContainer.add(deleteForm.getDeleteForm(), "deleteForm");
     }
 
+    /**
+     * Generates form for specifying fileName for saving bibliography to file
+     * @param cardContainer
+     */
     public void addFileNameForm(JPanel cardContainer) {
         FileNameForm fileNameForm = new FileNameForm(bibliography, cardContainer);
         cardContainer.add(fileNameForm.getFileNameForm(), "fileNameForm");

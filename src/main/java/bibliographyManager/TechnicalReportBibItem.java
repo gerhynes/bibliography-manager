@@ -70,6 +70,6 @@ public class TechnicalReportBibItem extends BibItem implements Comparable<BibIte
 
     @Override
     public int compareTo(BibItem nextItem){
-        return Integer.compare(this.getYear(), nextItem.getYear());
+        return Integer.compare(nextItem.getYear(), this.getYear());
     }
 }

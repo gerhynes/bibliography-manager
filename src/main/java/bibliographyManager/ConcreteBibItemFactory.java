@@ -1,7 +1,5 @@
 package main.java.bibliographyManager;
 
-import java.util.HashMap;
-
 public class ConcreteBibItemFactory {
     private static ConcreteBibItemFactory self;
     ItemInputStrategy bookStrategy;

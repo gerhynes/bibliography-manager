@@ -71,6 +71,6 @@ public class BookBibItem extends BibItem implements Comparable<BibItem>{
     }
     @Override
     public int compareTo(BibItem nextItem){
-        return Integer.compare(this.getYear(), nextItem.getYear());
+        return Integer.compare(nextItem.getYear(), this.getYear());
     }
 }
