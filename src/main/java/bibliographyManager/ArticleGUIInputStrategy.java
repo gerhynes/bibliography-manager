@@ -1,5 +1,7 @@
 package main.java.bibliographyManager;
 
+import main.java.bibliographyManager.GUIComponents.ArticleForm;
+
 public class ArticleGUIInputStrategy extends GUIItemInputStrategy {
     public BibItem createBibItemFromInput() {
         ArticleForm articleForm = new ArticleForm();
@@ -10,6 +12,6 @@ public class ArticleGUIInputStrategy extends GUIItemInputStrategy {
         String journal = articleForm.getJournal();
         String doi = articleForm.getDoi();
 
-        return  new ArticleBibItem(author, title, year, journal, doi);
+        return new ArticleBibItem(author, title, year, journal, doi);
     }
 }

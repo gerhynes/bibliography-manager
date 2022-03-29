@@ -1,5 +1,7 @@
 package main.java.bibliographyManager;
 
+import main.java.bibliographyManager.GUIComponents.TechnicalReportForm;
+
 public class TechReportGUIInputStrategy extends GUIItemInputStrategy {
     public BibItem createBibItemFromInput() {
         TechnicalReportForm technicalReportForm = new TechnicalReportForm();

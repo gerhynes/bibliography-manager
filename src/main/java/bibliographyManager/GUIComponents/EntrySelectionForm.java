@@ -1,10 +1,17 @@
-package main.java.bibliographyManager;
+package main.java.bibliographyManager.GUIComponents;
+
+import main.java.bibliographyManager.BibItem;
+import main.java.bibliographyManager.Bibliography;
+import main.java.bibliographyManager.ConcreteBibItemFactory;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles the selection of which type of BibItem is to be created
+ */
 public class EntrySelectionForm implements ActionListener {
     private Bibliography bibliography;
     private JPanel entrySelectionForm;
@@ -45,10 +52,18 @@ public class EntrySelectionForm implements ActionListener {
         cardContainer.add(entrySelectionForm, "entrySelection");
     }
 
+    /**
+     * Returns entrySelectionForm JPanel to container class
+     * @return
+     */
     public JPanel getEntrySelectionForm(){
         return this.entrySelectionForm;
     }
 
+    /**
+     * Uses ConcreteBibItemFactory to create BookBibItem
+     * Saves BookBibItem to bibliography
+     */
     private void createBook() {
         ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
 
@@ -61,6 +76,10 @@ public class EntrySelectionForm implements ActionListener {
         }
     }
 
+    /**
+     * Uses ConcreteBibItemFactory to create ArticleBibItem
+     * Saves ArticleBibItem to bibliography
+     */
     private void createArticle() {
         ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
         BibItem article = bibItemFactory.createBibItem("article");
@@ -72,6 +91,10 @@ public class EntrySelectionForm implements ActionListener {
         }
     }
 
+    /**
+     * Uses ConcreteBibItemFactory to create TechnicalReportBibItem
+     * Saves TechnicalReportBibItem to bibliography
+     */
     private void createTechnicalReport() {
         ConcreteBibItemFactory bibItemFactory = new ConcreteBibItemFactory();
         BibItem techReport = bibItemFactory.createBibItem("techReport");
@@ -83,6 +106,10 @@ public class EntrySelectionForm implements ActionListener {
         }
     }
 
+    /**
+     * Triggers creation of specific BibItem based off button clicked
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bookBtn) {

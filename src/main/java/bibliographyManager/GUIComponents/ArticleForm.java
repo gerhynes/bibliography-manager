@@ -1,4 +1,4 @@
-package main.java.bibliographyManager;
+package main.java.bibliographyManager.GUIComponents;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,12 +14,11 @@ public class ArticleForm implements ActionListener {
     private JTextField articleJournalInput;
     private JTextField articleDoiInput;
     private JButton articleSubmitBtn;
-
-    String author;
-    String title;
-    int year;
-    String journal;
-    String doi;
+    private String author;
+    private String title;
+    private int year;
+    private String journal;
+    private String doi;
 
     public ArticleForm() {
         dialog = new JDialog();

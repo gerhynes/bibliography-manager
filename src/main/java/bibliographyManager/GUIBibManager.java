@@ -1,10 +1,17 @@
 package main.java.bibliographyManager;
 
+import main.java.bibliographyManager.GUIComponents.DeleteForm;
+import main.java.bibliographyManager.GUIComponents.EntrySelectionForm;
+import main.java.bibliographyManager.GUIComponents.FileNameForm;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles the GUI for the application
+ */
 public class GUIBibManager implements ActionListener {
     private Bibliography bibliography;
     private JFrame frame;
@@ -27,7 +34,7 @@ public class GUIBibManager implements ActionListener {
     }
 
     /**
-     * Constructor to generate GUIBibManager
+     * Generates the GUI
      */
     public GUIBibManager() {
         // Instantiate bibliography singleton
@@ -54,7 +61,7 @@ public class GUIBibManager implements ActionListener {
      */
     public void addDemoEntries(){
         BookBibItem book = new BookBibItem("Rothfuss, Patrick", "The Wise Man's Fear", 2011, "Tor");
-        ArticleBibItem article  = new ArticleBibItem("Bogue, Lorna", "Ringfort Conservation", 2019, "Eriu 57 (1)", "10.1007/54321");
+        ArticleBibItem article  = new ArticleBibItem("Bogue, Lorna", "Ringfort Conservation", 2019, "Eriu, vol. 57 no. 2", "10.1007/54321");
         TechnicalReportBibItem technicalReport = new TechnicalReportBibItem("Lenihan, Eddie", "Curlew Conservation on the Mid Shannon", 2005, "NPWS");
 
         bibliography.addEntry(book);
@@ -101,7 +108,7 @@ public class GUIBibManager implements ActionListener {
     }
 
     /**
-     * Generates card container for forms and outputs and adds to frame
+     * Generates card container (for forms and outputs) and adds to frame
      * @param frame
      */
     public void addCardContainer(JFrame frame) {
@@ -149,48 +156,25 @@ public class GUIBibManager implements ActionListener {
         cardContainer.add(fileNameForm.getFileNameForm(), "fileNameForm");
     }
 
+    /**
+     * Generates form for selecting which BibItem to create
+     * @param cardContainer
+     */
     public void addEntrySelectionForm(JPanel cardContainer) {
         EntrySelectionForm entrySelectionForm = new EntrySelectionForm(bibliography, cardContainer);
         cardContainer.add(entrySelectionForm.getEntrySelectionForm(), "entrySelection");
     }
 
+    /**
+     * Generates card for displaying bibliography entries
+     * @param cardContainer
+     */
     public void addEntriesDisplayPanel(JPanel cardContainer){
-        JPanel viewEntries = new JPanel();
-        textArea = new JTextArea();
+        JPanel viewEntries = new JPanel(new FlowLayout());
+        textArea = new JTextArea(30,70);
         JScrollPane scrollPane = new JScrollPane(textArea);
         viewEntries.add(scrollPane);
-
         cardContainer.add(viewEntries, "viewEntries");
-    }
-
-    /**
-     * Loads appropriate card based on button clicked
-     *
-     * @param e
-     */
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        CardLayout cardLayout = (CardLayout) cardContainer.getLayout();
-
-        if (e.getSource() == loadFileBtn) {
-            cardLayout.show(cardContainer, "loadFile");
-        }
-        if (e.getSource() == saveToFileBtn) {
-            cardLayout.show(cardContainer, "fileNameForm");
-        }
-        if (e.getSource() == deleteEntryBtn) {
-            cardLayout.show(cardContainer, "deleteForm");
-        }
-        if (e.getSource() == viewBibliographyBtn) {
-            viewEntries();
-            cardLayout.show(cardContainer, "viewEntries");
-        }
-        if (e.getSource() == addEntryBtn) {
-            cardLayout.show(cardContainer, "entrySelection");
-        }
-        if (e.getSource() == quitBtn) {
-            quit();
-        }
     }
 
     /**
@@ -218,5 +202,33 @@ public class GUIBibManager implements ActionListener {
         System.exit(0);
         // Prevent any further code from running while system terminates
         return;
+    }
+
+    /**
+     * Loads appropriate card based on button clicked
+     * @param e
+     */
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        CardLayout cardLayout = (CardLayout) cardContainer.getLayout();
+        if (e.getSource() == loadFileBtn) {
+            cardLayout.show(cardContainer, "loadFile");
+        }
+        if (e.getSource() == saveToFileBtn) {
+            cardLayout.show(cardContainer, "fileNameForm");
+        }
+        if (e.getSource() == deleteEntryBtn) {
+            cardLayout.show(cardContainer, "deleteForm");
+        }
+        if (e.getSource() == viewBibliographyBtn) {
+            viewEntries();
+            cardLayout.show(cardContainer, "viewEntries");
+        }
+        if (e.getSource() == addEntryBtn) {
+            cardLayout.show(cardContainer, "entrySelection");
+        }
+        if (e.getSource() == quitBtn) {
+            quit();
+        }
     }
 }

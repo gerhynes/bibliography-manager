@@ -1,4 +1,4 @@
-package main.java.bibliographyManager;
+package main.java.bibliographyManager.GUIComponents;
 
 import javax.swing.*;
 import java.awt.*;

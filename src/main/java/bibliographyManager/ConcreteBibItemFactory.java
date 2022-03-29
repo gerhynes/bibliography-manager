@@ -6,7 +6,7 @@ public class ConcreteBibItemFactory {
     ItemInputStrategy articleStrategy;
     ItemInputStrategy techReportStrategy;
 
-    protected ConcreteBibItemFactory() {
+    public ConcreteBibItemFactory() {
         bookStrategy = new BookGUIInputStrategy();
         articleStrategy = new ArticleGUIInputStrategy();
         techReportStrategy = new TechReportGUIInputStrategy();

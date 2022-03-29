@@ -1,5 +1,7 @@
 package main.java.bibliographyManager;
 
+import main.java.bibliographyManager.GUIComponents.BookForm;
+
 public class BookGUIInputStrategy extends GUIItemInputStrategy{
     public BibItem createBibItemFromInput() {
         BookForm bookForm = new BookForm();

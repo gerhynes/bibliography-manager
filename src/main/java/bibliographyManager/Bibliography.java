@@ -68,7 +68,7 @@ public class Bibliography {
     }
 
     /**
-     * Writes entries to .txt file in BibTeX format
+     * Writes entries to .txt file in BibTeX format in the resources directory
      * @param fileName
      */
     public void saveToFile(String fileName) {

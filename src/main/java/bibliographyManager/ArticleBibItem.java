@@ -14,8 +14,42 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
         this.title = title;
         this.year = year;
         this.journal = journal;
-        this.citeKey = author.substring(0, author.indexOf(",")) + String.valueOf(year).substring(2) + journal.substring(0, journal.indexOf(' ')).toLowerCase();
+        this.citeKey = generateCiteKey(author, year, journal);
         this.doi = "https://doi.org/" + doi;
+    }
+
+    /**
+     * Check formatting of author and journal to generate valid citeKey
+     * @param author
+     * @param year
+     * @param journal
+     * @return
+     */
+    public String generateCiteKey(String author, int year, String journal){
+        String citeKey = "";
+        String lastName;
+        // If author is "lastname, firstname", use lastname
+        if (author.indexOf(",") != -1) {
+            lastName = author.substring(0, author.indexOf(","));
+        } else {
+            // If author is "firstname lastname", use lastname
+            lastName = author.split(" ")[1];
+        }
+
+        // Get final two digits from year
+        String yearShortFormat = String.valueOf(year).substring(2);
+
+        String journalTitle = "";
+        // If journal is "title, details", use title
+        if(journal.indexOf(",") != -1){
+            journalTitle = journal.substring(0, journal.indexOf(",")).toLowerCase();
+        } else{
+            // Use entire title provided
+            journalTitle = journal.toLowerCase();
+        }
+
+        citeKey = lastName + yearShortFormat + journalTitle;
+        return citeKey;
     }
 
     public String getCiteKey() {

@@ -1,4 +1,6 @@
-package main.java.bibliographyManager;
+package main.java.bibliographyManager.GUIComponents;
+
+import main.java.bibliographyManager.Bibliography;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,11 +24,11 @@ public class FileNameForm implements ActionListener {
         JPanel fileNameFormBody = new JPanel(new FlowLayout());
 
         // Set title message
-        JLabel fileNameFormMessage = new JLabel("Enter a filename for the bibliography");
+        JLabel fileNameFormMessage = new JLabel("Enter a filename to save the bibliography to a .txt file");
         fileNameFormTitle.add(fileNameFormMessage);
 
         // Set form elements
-        JLabel fileNameLabel = new JLabel("Enter file name");
+        JLabel fileNameLabel = new JLabel("Enter file name (no extension)");
         fileNameInput = new JTextField(20);
         fileNameSubmitBtn = new JButton("Submit");
         fileNameSubmitBtn.addActionListener(this);
