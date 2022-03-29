@@ -10,7 +10,6 @@ import java.awt.event.ActionListener;
  */
 public class ArticleForm implements ActionListener {
     private JDialog dialog;
-    private JPanel articleForm;
     private JTextField articleAuthorInput;
     private JTextField articleTitleInput;
     private JTextField articleYearInput;
@@ -30,7 +29,7 @@ public class ArticleForm implements ActionListener {
         dialog = new JDialog();
         dialog.setSize(600, 600);
 
-        this.articleForm = new JPanel(new GridLayout(3, 1));
+        JPanel articleForm = new JPanel(new GridLayout(3, 1));
         JPanel articleFormTitle = new JPanel(new FlowLayout());
         JPanel articleFormBody = new JPanel(new GridLayout(6, 1));
 
@@ -130,46 +129,6 @@ public class ArticleForm implements ActionListener {
 
     public void setDoi(String doi) {
         this.doi = doi;
-    }
-
-    public JTextField getArticleAuthorInput() {
-        return articleAuthorInput;
-    }
-
-    public void setArticleAuthorInput(JTextField articleAuthorInput) {
-        this.articleAuthorInput = articleAuthorInput;
-    }
-
-    public JTextField getArticleTitleInput() {
-        return articleTitleInput;
-    }
-
-    public void setArticleTitleInput(JTextField articleTitleInput) {
-        this.articleTitleInput = articleTitleInput;
-    }
-
-    public JTextField getArticleYearInput() {
-        return articleYearInput;
-    }
-
-    public void setArticleYearInput(JTextField articleYearInput) {
-        this.articleYearInput = articleYearInput;
-    }
-
-    public JTextField getArticleJournalInput() {
-        return articleJournalInput;
-    }
-
-    public void setArticleJournalInput(JTextField articleJournalInput) {
-        this.articleJournalInput = articleJournalInput;
-    }
-
-    public JTextField getArticleDoiInput() {
-        return articleDoiInput;
-    }
-
-    public void setArticleDoiInput(JTextField articleDoiInput) {
-        this.articleDoiInput = articleDoiInput;
     }
 
     /**

@@ -6,10 +6,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class ArticleBibItemTests {
-    ArticleBibItem article = new ArticleBibItem("Noam Chomsky", "Logical Syntax and Semantics: Their Linguistic Relevance", 1955, "Language. 31 (1): 36–45", "10.1007/54956");
+    ArticleBibItem article = new ArticleBibItem("Noam Chomsky", "Logical Syntax and Semantics: Their Linguistic Relevance", 1955, "Language, 31 (1): 36–45", "10.1007/54956");
     String doi = article.getDoi();
 
     @Test

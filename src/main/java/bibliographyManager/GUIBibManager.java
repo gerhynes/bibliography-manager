@@ -132,7 +132,7 @@ public class GUIBibManager implements ActionListener {
         addEntrySelectionForm(cardContainer);
         addDeleteForm(cardContainer);
         addFileNameForm(cardContainer);
-        addEntriesDisplayPanel(cardContainer);
+        addViewEntriesPanel(cardContainer);
 
         // Add cardContainer to frame
         frame.add(cardContainer, BorderLayout.CENTER);
@@ -169,7 +169,7 @@ public class GUIBibManager implements ActionListener {
      * Generates card for displaying bibliography entries
      * @param cardContainer
      */
-    public void addEntriesDisplayPanel(JPanel cardContainer){
+    public void addViewEntriesPanel(JPanel cardContainer){
         JPanel viewEntries = new JPanel(new FlowLayout());
         textArea = new JTextArea(30,70);
         JScrollPane scrollPane = new JScrollPane(textArea);

@@ -5,11 +5,11 @@ package main.java.bibliographyManager;
  */
 public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
     String citeKey;
-    String doi;
     String author;
     String title;
     int year;
     String journal;
+    String doi;
 
     /**
      * Generates ArticleBibItem
