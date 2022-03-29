@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles inputting the values for creating a new TechnicalReportBibItem
+ */
 public class TechnicalReportForm implements ActionListener {
     private JDialog dialog;
     private JTextField technicalReportAuthorInput;
@@ -12,12 +15,14 @@ public class TechnicalReportForm implements ActionListener {
     private JTextField technicalReportYearInput;
     private JTextField technicalReportInstitutionInput;
     private JButton technicalReportSubmitBtn;
+    private String title;
+    private String author;
+    private int year;
+    private String institution;
 
-    String title;
-    String author;
-    int year;
-    String institution;
-
+    /**
+     * Generates TechnicalReportForm
+     */
     public TechnicalReportForm() {
         dialog = new JDialog();
         dialog.setSize(600, 600);
@@ -77,6 +82,7 @@ public class TechnicalReportForm implements ActionListener {
         dialog.setVisible(true);
     }
 
+    // Getters and Setters
     public String getTitle() {
         return title;
     }
@@ -109,6 +115,10 @@ public class TechnicalReportForm implements ActionListener {
         this.institution = institution;
     }
 
+    /**
+     * Saves input values to private variables for access by TechReportGUIStrategy
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == technicalReportSubmitBtn) {

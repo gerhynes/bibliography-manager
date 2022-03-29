@@ -1,6 +1,8 @@
 package main.java.bibliographyManager;
 
-
+/**
+ * BibItem for recording academic articles
+ */
 public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
     String citeKey;
     String doi;
@@ -9,6 +11,14 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
     int year;
     String journal;
 
+    /**
+     * Generates ArticleBibItem
+     * @param author
+     * @param title
+     * @param year
+     * @param journal
+     * @param doi
+     */
     public ArticleBibItem(String author, String title, int year, String journal, String doi) {
         this.author = author;
         this.title = title;
@@ -19,7 +29,7 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
     }
 
     /**
-     * Check formatting of author and journal to generate valid citeKey
+     * Checks formatting of author and journal to generate valid citeKey
      * @param author
      * @param year
      * @param journal
@@ -52,6 +62,7 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
         return citeKey;
     }
 
+    // Getters and Setters
     public String getCiteKey() {
         return citeKey;
     }
@@ -100,10 +111,18 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
         this.journal = journal;
     }
 
+    /**
+     * Provides string representation of article in Harvard style
+     * @return
+     */
     public String toHarvardStyle() {
         return author + ". (" + year + "). " + title + ". " + journal + ". " + doi;
     }
 
+    /**
+     * Provides string representation of article in BibTeX format
+     * @return
+     */
     public String toBibTeX() {
         return "@article{" + citeKey + ",\n"
                 + "author=\"" + author + "\",\n"
@@ -114,6 +133,11 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
                 + "}";
     }
 
+    /**
+     * Allows for comparison of BibItems based off their year of publication
+     * @param nextItem
+     * @return
+     */
     @Override
     public int compareTo(BibItem nextItem) {
         return Integer.compare(nextItem.getYear(), this.getYear());

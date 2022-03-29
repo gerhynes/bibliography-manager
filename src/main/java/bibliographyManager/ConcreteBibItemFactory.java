@@ -1,22 +1,28 @@
 package main.java.bibliographyManager;
 
+/**
+ * Creates specific BibItems based off the strategy provided
+ */
 public class ConcreteBibItemFactory {
-    private static ConcreteBibItemFactory self;
-    ItemInputStrategy bookStrategy;
-    ItemInputStrategy articleStrategy;
-    ItemInputStrategy techReportStrategy;
+    private ItemInputStrategy bookStrategy;
+    private ItemInputStrategy articleStrategy;
+    private ItemInputStrategy techReportStrategy;
 
+    /**
+     * Generate ConcreteBibItemFactory and instantiate strategies
+     */
     public ConcreteBibItemFactory() {
         bookStrategy = new BookGUIInputStrategy();
         articleStrategy = new ArticleGUIInputStrategy();
         techReportStrategy = new TechReportGUIInputStrategy();
     }
 
-    public static ConcreteBibItemFactory getInstance() {
-        if (self == null) self = new ConcreteBibItemFactory();
-        return self;
-    }
-
+    /**
+     * Selects appropriate strategy based off option provided
+     * Delegates creation of BibItem to createBibItemUsingStrategy()
+     * @param typeOfItem
+     * @return
+     */
     public BibItem createBibItem(String typeOfItem) {
         BibItem item = null;
         if (typeOfItem.equals("book")) {
@@ -31,6 +37,11 @@ public class ConcreteBibItemFactory {
         return item;
     }
 
+    /**
+     * Creates specific BibItem based off strategy provided
+     * @param strategy
+     * @return
+     */
     private BibItem createBibItemUsingStrategy(ItemInputStrategy strategy) {
         return strategy.createBibItemFromInput();
     }

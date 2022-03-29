@@ -21,6 +21,11 @@ public class EntrySelectionForm implements ActionListener {
     private JButton articleBtn;
     private JButton techReportBtn;
 
+    /**
+     * Generates EntrySelectionForm
+     * @param bibliography
+     * @param cardContainer
+     */
     public EntrySelectionForm(Bibliography bibliography, JPanel cardContainer){
         this.bibliography = bibliography;
         this.cardContainer = cardContainer;

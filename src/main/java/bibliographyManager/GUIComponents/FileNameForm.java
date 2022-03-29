@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles specifying which file to save bibliography entries to
+ */
 public class FileNameForm implements ActionListener {
     private Bibliography bibliography;
     private JPanel fileNameForm;
@@ -15,6 +18,11 @@ public class FileNameForm implements ActionListener {
     private JTextField fileNameInput;
     private JButton fileNameSubmitBtn;
 
+    /**
+     * Generates FileNameForm
+     * @param bibliography
+     * @param cardContainer
+     */
     public FileNameForm(Bibliography bibliography, JPanel cardContainer){
         this.bibliography = bibliography;
         this.cardContainer = cardContainer;
@@ -41,19 +49,23 @@ public class FileNameForm implements ActionListener {
         fileNameForm.add(fileNameFormBody);
     }
 
+    /**
+     * Returns FileNameForm for use in main GUI
+     * @return
+     */
     public JPanel getFileNameForm(){
         return this.fileNameForm;
     }
 
     /**
-     * Saves bibliography's entries to .txt file in Harvard format
+     * Saves bibliography's entries to .txt file in Harvard format in resources directory
      * @param e
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == fileNameSubmitBtn) {
             String fileName = fileNameInput.getText();
-            System.out.println("Saving bibliography to: " + fileName + ".txt");
+            System.out.println("Saving bibliography to " + fileName + ".txt in resources directory");
             bibliography.saveToFile(fileName);
             cardLayout.show(cardContainer, "defaultCard");
         }

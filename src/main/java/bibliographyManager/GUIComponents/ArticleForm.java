@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles inputting the values for creating a new ArticleBibItem
+ */
 public class ArticleForm implements ActionListener {
     private JDialog dialog;
     private JPanel articleForm;
@@ -20,6 +23,9 @@ public class ArticleForm implements ActionListener {
     private String journal;
     private String doi;
 
+    /**
+     * Generates ArticleForm
+     */
     public ArticleForm() {
         dialog = new JDialog();
         dialog.setSize(600, 600);
@@ -85,6 +91,7 @@ public class ArticleForm implements ActionListener {
         dialog.setVisible(true);
     }
 
+    // Getters and Setters
     public String getAuthor() {
         return author;
     }
@@ -165,6 +172,10 @@ public class ArticleForm implements ActionListener {
         this.articleDoiInput = articleDoiInput;
     }
 
+    /**
+     * Saves input values to private variables for access by ArticleGUIInputStrategy
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == articleSubmitBtn) {

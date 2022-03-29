@@ -7,6 +7,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles deleting a BibItem based off its citeKey
+ */
 public class DeleteForm implements ActionListener {
     private Bibliography bibliography;
     private JPanel deleteForm;
@@ -15,10 +18,17 @@ public class DeleteForm implements ActionListener {
     private JTextField citeKeyInput;
     private JButton deleteSubmitBtn;
 
+    /**
+     * Generates DeleteForm
+     * @param bibliography
+     * @param cardContainer
+     */
     public DeleteForm(Bibliography bibliography, JPanel cardContainer){
         this.bibliography = bibliography;
         this.cardContainer = cardContainer;
         this.cardLayout = (CardLayout) cardContainer.getLayout();
+
+        // Set up form
         this.deleteForm = new JPanel(new GridLayout(2, 1));
         JPanel deleteFormTitle = new JPanel(new FlowLayout());
         JPanel deleteFormBody = new JPanel(new FlowLayout());
@@ -41,10 +51,18 @@ public class DeleteForm implements ActionListener {
         deleteForm.add(deleteFormBody);
     }
 
+    /**
+     * Returns form for use in main GUI
+     * @return
+     */
     public JPanel getDeleteForm(){
         return this.deleteForm;
     }
 
+    /**
+     * Triggers deletion of entry
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == deleteSubmitBtn) {

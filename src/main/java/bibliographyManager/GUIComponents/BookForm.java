@@ -5,6 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Handles inputting the values for creating a new BookBibItem
+ */
 public class BookForm implements ActionListener {
     private JDialog dialog;
     private JTextField bookAuthorInput;
@@ -12,12 +15,14 @@ public class BookForm implements ActionListener {
     private JTextField bookYearInput;
     private JTextField bookPublisherInput;
     private JButton bookSubmitBtn;
-
     private String author;
     private String title;
     private int year;
     private String publisher;
 
+    /**
+     * Generates BookForm
+     */
     public BookForm() {
         dialog = new JDialog();
         dialog.setSize(600, 600);
@@ -77,6 +82,7 @@ public class BookForm implements ActionListener {
         dialog.setVisible(true);
     }
 
+    // Getters and Setters
     public String getAuthor() {
         return author;
     }
@@ -109,6 +115,10 @@ public class BookForm implements ActionListener {
         this.publisher = publisher;
     }
 
+    /**
+     * Saves input values to private variables for access by BookGUIInputStrategy
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bookSubmitBtn) {

@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Handles the GUI for the application
+ * Handles the main GUI for the application
  */
 public class GUIBibManager implements ActionListener {
     private Bibliography bibliography;
@@ -70,7 +70,7 @@ public class GUIBibManager implements ActionListener {
     }
 
     /**
-     * Generates admin panel and adds to frame
+     * Generates admin panel and adds to GUI
      * @param frame
      */
     public void addAdminPanel(JFrame frame) {
@@ -108,7 +108,7 @@ public class GUIBibManager implements ActionListener {
     }
 
     /**
-     * Generates card container (for forms and outputs) and adds to frame
+     * Generates card container (for forms and outputs) and adds to GUI
      * @param frame
      */
     public void addCardContainer(JFrame frame) {
@@ -139,7 +139,7 @@ public class GUIBibManager implements ActionListener {
     }
 
     /**
-     * Generates delete form and adds to frame
+     * Generates form for deleting BibItems based off their citeKey
      * @param cardContainer
      */
     public void addDeleteForm(JPanel cardContainer) {

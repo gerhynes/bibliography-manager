@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.*;
 
 /**
- * Bibliography - Singleton for storing and accessing bibliography entries
+ * Singleton for storing and accessing bibliography entries
  */
 public class Bibliography {
     private static Bibliography self;
@@ -15,6 +15,9 @@ public class Bibliography {
 
     private HashMap<String, BibItem> entries;
 
+    /**
+     * Generates bibliography
+     */
     protected Bibliography() {
         this.entries = new HashMap<String, BibItem>();
     }
@@ -28,10 +31,18 @@ public class Bibliography {
         this.bibFileReader = bibFileReader;
     }
 
+    /**
+     * Adds BibItem to bibliography
+     * @param entry
+     */
     public void addEntry(BibItem entry) {
         this.entries.put(entry.getCiteKey(), entry);
     }
 
+    /**
+     * Deletes BibItem from bibliography based off the item's citeKey
+     * @param citeKey
+     */
     public void deleteEntry(String citeKey){
         entries.remove(citeKey);
     }
@@ -42,10 +53,8 @@ public class Bibliography {
      */
     public String getEntriesHarvardStyle() {
         String res = "";
-
         ArrayList<BibItem> entryList = new ArrayList<>(entries.values());
         entryList.sort(new SortedByYear());
-
         for(BibItem item : entryList) {
             res +=item.toHarvardStyle() + "\n\n";
         }
@@ -60,7 +69,6 @@ public class Bibliography {
         String res = "";
         ArrayList<BibItem> entryList = new ArrayList<>(entries.values());
         entryList.sort(new SortedByYear());
-
         for(BibItem item : entryList) {
             res +=item.toBibTeX() + "\n\n";
         }

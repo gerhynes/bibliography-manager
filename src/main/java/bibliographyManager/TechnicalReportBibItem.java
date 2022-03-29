@@ -1,5 +1,8 @@
 package main.java.bibliographyManager;
 
+/**
+ * Represents single technical report in bibliography
+ */
 public class TechnicalReportBibItem extends BibItem implements Comparable<BibItem>{
     String citeKey;
     String author;
@@ -7,14 +10,42 @@ public class TechnicalReportBibItem extends BibItem implements Comparable<BibIte
     int year;
     String institution;
 
+    /**
+     * Generates TechnicalReportBibItem
+     * @param author
+     * @param title
+     * @param year
+     * @param institution
+     */
     public TechnicalReportBibItem(String author, String title, int year, String institution) {
         this.author = author;
         this.title = title;
         this.year = year;
         this.institution = institution;
-        this.citeKey = author.substring(0, author.indexOf(",")) + ":" + year;
+        this.citeKey = generateCiteKey(author, year);
     }
 
+    /**
+     * Generates valid citeKey
+     * @param author
+     * @param year
+     * @return
+     */
+    public String generateCiteKey(String author, int year){
+        String citeKey = "";
+        String lastName = "";
+        // If author is "lastname, firstname", use lastname
+        if (author.indexOf(",") != -1) {
+            lastName = author.substring(0, author.indexOf(","));
+        } else {
+            // If author is "firstname lastname", use lastname
+            lastName = author.split(" ")[1];
+        }
+        citeKey = lastName.toLowerCase() + ":" + year;
+        return citeKey;
+    }
+
+    // Getters and Setters
     public String getCiteKey() {
         return citeKey;
     }
@@ -55,10 +86,18 @@ public class TechnicalReportBibItem extends BibItem implements Comparable<BibIte
         this.institution = institution;
     }
 
+    /**
+     * Provides string representation of article in Harvard style
+     * @return
+     */
     public String toHarvardStyle() {
         return author + ". (" + year + "). " + title + ". " + institution + ".";
     }
 
+    /**
+     * Provides string representation of article in BibTeX format
+     * @return
+     */
     public String toBibTeX() {
         return "@techreport{" + citeKey + ",\n"
                 + "author=\"" + author + "\",\n"
@@ -68,6 +107,11 @@ public class TechnicalReportBibItem extends BibItem implements Comparable<BibIte
                 + "}";
     }
 
+    /**
+     * Allows for comparison of BibItems based off their year of publication
+     * @param nextItem
+     * @return
+     */
     @Override
     public int compareTo(BibItem nextItem){
         return Integer.compare(nextItem.getYear(), this.getYear());
