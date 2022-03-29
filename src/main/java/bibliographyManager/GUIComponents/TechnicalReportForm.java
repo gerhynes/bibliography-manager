@@ -112,13 +112,16 @@ public class TechnicalReportForm implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == technicalReportSubmitBtn) {
-            System.out.println("Technical Report Submitted");
             title = technicalReportTitleInput.getText();
             author = technicalReportAuthorInput.getText();
-            year = Integer.parseInt(technicalReportYearInput.getText());
+            // Check if year can be converted to int
+            String yearString = technicalReportYearInput.getText();
+            if ( yearString.equals("")){
+                year = 0000;
+            } else {
+                year = Integer.parseInt(yearString);
+            }
             institution = technicalReportInstitutionInput.getText();
-
-            System.out.println("title: " + title + " author: " + author + " year: " + year + " institution: " + institution);
             dialog.dispose();
         }
     }

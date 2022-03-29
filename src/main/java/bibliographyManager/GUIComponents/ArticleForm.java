@@ -168,14 +168,17 @@ public class ArticleForm implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == articleSubmitBtn) {
-            System.out.println("Article Submitted");
             title = articleTitleInput.getText();
             author = articleAuthorInput.getText();
-            year = Integer.parseInt(articleYearInput.getText());
+            // Check if year can be converted to int
+            String yearString = articleYearInput.getText();
+            if ( yearString.equals("")){
+                year = 0000;
+            } else {
+                year = Integer.parseInt(yearString);
+            }
             journal = articleJournalInput.getText();
             doi = articleDoiInput.getText();
-
-            System.out.println("title: " + title + " author: " + author + " year: " + year + " journal: " + journal + " doi: " + doi);
             dialog.dispose();
         }
     }

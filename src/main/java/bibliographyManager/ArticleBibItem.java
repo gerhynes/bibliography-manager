@@ -27,7 +27,7 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
      */
     public String generateCiteKey(String author, int year, String journal){
         String citeKey = "";
-        String lastName;
+        String lastName = "";
         // If author is "lastname, firstname", use lastname
         if (author.indexOf(",") != -1) {
             lastName = author.substring(0, author.indexOf(","));
@@ -43,7 +43,7 @@ public class ArticleBibItem extends BibItem implements Comparable<BibItem> {
         // If journal is "title, details", use title
         if(journal.indexOf(",") != -1){
             journalTitle = journal.substring(0, journal.indexOf(",")).toLowerCase();
-        } else{
+        } else {
             // Use entire title provided
             journalTitle = journal.toLowerCase();
         }

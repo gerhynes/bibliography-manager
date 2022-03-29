@@ -12,6 +12,10 @@ public class ArticleGUIInputStrategy extends GUIItemInputStrategy {
         String journal = articleForm.getJournal();
         String doi = articleForm.getDoi();
 
-        return new ArticleBibItem(author, title, year, journal, doi);
+        if(title.isEmpty() || author.isEmpty() || journal.isEmpty() || doi.isEmpty()){
+            return null;
+        } else {
+            return new ArticleBibItem(author, title, year, journal, doi);
+        }
     }
 }

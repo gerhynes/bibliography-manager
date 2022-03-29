@@ -112,13 +112,16 @@ public class BookForm implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == bookSubmitBtn) {
-            System.out.println("Book Submitted");
             title = bookTitleInput.getText();
             author = bookAuthorInput.getText();
-            year = Integer.parseInt(bookYearInput.getText());
+            // Check if year can be converted to int
+            String yearString = bookYearInput.getText();
+            if ( yearString.equals("")){
+                year = 0000;
+            } else {
+                year = Integer.parseInt(yearString);
+            }
             publisher = bookPublisherInput.getText();
-
-            System.out.println("title: " + title + " author: " + author + " year: " + year + " publisher: " + publisher);
             dialog.dispose();
         }
     }

@@ -11,6 +11,10 @@ public class TechReportGUIInputStrategy extends GUIItemInputStrategy {
         int year = technicalReportForm.getYear();
         String institution = technicalReportForm.getInstitution();
 
-        return new TechnicalReportBibItem(author, title, year, institution);
+        if(title.isEmpty() || author.isEmpty() || institution.isEmpty()){
+            return null;
+        } else {
+            return new TechnicalReportBibItem(author, title, year, institution);
+        }
     }
 }
